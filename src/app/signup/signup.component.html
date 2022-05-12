@@ -1,0 +1,110 @@
+<div class="container" style="border: 3px solid black; width: 400px; background-color:black; opacity: 0.8; border-radius: px; margin-top: 5rem;   ">
+    <div class="">
+        <div class="card-body">
+            <h4 class="card-title" style="text-align: center;color: white;"> <b>USER REGISTRATION</b></h4>
+            <hr>
+            <div class=" row ">
+                <div class="col ">
+                    <form [formGroup]="signForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label> <b>First Name:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter Your First Name" formControlName="FirstName">
+                            <!-- [ngClass]="{'is-invalid': FirstName.errors && (FirstName.touched || FirstName.dirty), 'is-valid':FirstName.valid}" -->
+                            <!-- <div class="invalid-feedback">
+                                <strong *ngIf="FirstName.errors?.required">Name is required</strong>
+                                <strong *ngIf="FirstName.errors?.minlength">Name length must be greater than {{FirstName.errors?.minlength.requiredLength}} character. {{FirstName.errors?.minlength.requiredLength - FirstName.errors?.minlength.actualLength}} more character required. </strong>
+                            </div> -->
+                        </div>
+                        <!-- ----------------- -->
+
+                        <div class="form-group ">
+                            <label><b>Last Name:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter Your Last Name" formControlName="LastName">
+                            <!-- [ngClass]="{'is-invalid': LastName.errors && (LastName.touched || LastName.dirty), 'is-valid':LastName.valid}" -->
+                            <!-- <div class="invalid-feedback">
+                                <strong *ngIf="LastName.errors?.required">Name is required</strong>
+                                <strong *ngIf="LastName.errors?.minlength">Name length must be greater than {{LastName.errors?.minlength.requiredLength}} character. {{LastName.errors?.minlength.requiredLength - LastName.errors?.minlength.actualLength}} more character required. </strong>
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label><b>Email</b></label>
+                            <input type="text" class="form-control" placeholder="Enter Your Email" formControlName="Email">
+                            <!-- [ngClass]="{'is-invalid': Email.errors && (Email.touched || Email.dirty), 'is-valid':Email.valid}" -->
+                            <!-- <div *ngIf="Email.touched && Email.invalid" class="text-danger">
+                                <div *ngIf="Email.errors?.required">Email is required.</div>
+                                <div *ngIf="Email.errors?.Email">Email seems invalid.</div>
+                            </div> -->
+                        </div>
+                        <!-- <div class="form-group ">
+                            <label> <b>Confirm Email :</b></label>
+                            <input type="email" id="email" class="form-control" placeholder="Confirm Your Email" formControlName="Confirm" [ngClass]="{ 'is-invalid': Confirm.errors && (Confirm.touched || Confirm.dirty)} ">
+                            <div *ngIf="Confirm.touched && Confirm.invalid" class="text-danger">
+                                <div *ngIf="Confirm.errors?.required">Email is required.</div>
+                                <div *ngIf="Confirm.errors?.Confirm">Email seems invalid.</div>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label><b>Password</b></label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter Your Password" formControlName="Password" name="pswd">
+                            <!-- [ngClass]="{ 'is-invalid': Password.errors && (Password.touched || Password.dirty)} " -->
+                            <!-- <div *ngIf="Password.touched && Password.invalid" class="text-danger">
+                                <div *ngIf="Password.errors?.required">Password is required.</div>
+                                <div *ngIf="Password.errors?.Confirm">Password seems invalid.</div>
+                            </div> -->
+                        </div>
+                        <div class="form-group ">
+                            <label><b>Confirm Password</b></label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Confirm Your password" formControlName="ConfirmPassword" name="pswd">
+                            <!-- [ngClass]="{'is-invalid': ConfirmPassword.errors && (ConfirmPassword.touched || ConfirmPassword.dirty)}  -->
+                            <!-- <div *ngIf="ConfirmPassword.touched && ConfirmPassword.invalid" class="text-danger">
+                                <div *ngIf="ConfirmPassword?.errors.required">ConfirmPassword is required.</div>
+                                <div *ngIf="ConfirmPassword?.errors.ConfirmPassword">ConfirmPassword seems invalid.</div>
+                            </div> -->
+                        </div>
+                        <div class="form-group ">
+                            <label> <b>Phone Number :</b></label>
+                            <input type="text" formControlName="Pno" placeholder="Enter Your Number" class="form-control mb-3">
+
+                            <!-- <div *ngIf="Pno.touched && Pno.invalid" class="alert alert-danger">
+                                <div *ngIf="Pno.errors?.required">Mobile number is required</div>
+                                <div *ngIf="Pno.errors?.pattern">Provide 10 digit phone number</div>
+                            </div> -->
+                        </div>
+
+                        <br>
+                        <button type="submit " class="btn btn-outline-light">Submit</button> &nbsp;
+                        <button class="btn btn-outline-light">Reset</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<table class="table table-responsive" style="border: 1px solid black;margin-top: 5rem; background-color: orange;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>ConfirmPassword</th>
+            <th>Phone</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of allUsers |async;">
+            <td> {{s.id}}</td>
+            <td> {{s.FirstName}}</td>
+            <td> {{s.LastName}}</td>
+            <td> {{s.Email}}</td>
+            <td> {{s.Password}}</td>
+            <td> {{s.ConfirmPassword}}</td>
+            <td> {{s.Pno}}</td>
+
+        </tr>
+    </tbody>
+</table>

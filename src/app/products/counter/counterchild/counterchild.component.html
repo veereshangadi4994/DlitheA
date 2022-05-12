@@ -1,0 +1,9 @@
+<div class="counter">
+    <div class="counter__container btn btn-primary">
+
+        <button (click)="decrement();" class="btn btn-outline-light" [disabled]="!countLessThenOne"><i class="fa fa-minus"></i></button>
+
+        <button (click)="increment();" class="btn btn-outline-light" [value]="counterValue"><i class="fa fa-plus"></i></button>
+
+    </div>
+</div>

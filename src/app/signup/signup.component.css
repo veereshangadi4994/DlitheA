@@ -1,0 +1,10 @@
+.bgimg {
+    background-image: url("..//../assets/bgfruit.jpg");
+    background-attachment: fixed;
+    /* position: fixed; */
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 100vh; */
+    height: 100vh;
+}
