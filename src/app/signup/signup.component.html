@@ -72,8 +72,8 @@
                         </div>
 
                         <br>
-                        <button type="submit " class="btn btn-outline-light">Submit</button> &nbsp;
-                        <button class="btn btn-outline-light">Reset</button>
+                        <button type="submit " class="btn btn-outline-light" id="register">Submit</button> &nbsp;
+                        <button type="reset" class="btn btn-outline-light (click)=resetForm">Reset</button>
                     </form>
                 </div>
             </div>
@@ -104,6 +104,12 @@
             <td> {{s.Password}}</td>
             <td> {{s.ConfirmPassword}}</td>
             <td> {{s.Pno}}</td>
+            <td>
+                <button type="button" class="btn btn-info" Tooltip="Click Edit Button" (click)="loadUserToEdit(s.id)">Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" Tooltip="Click Delete Button" (click)="deleteUser(s.id)">Delete</button>
+            </td>
 
         </tr>
     </tbody>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Sign } from '../sign';
 import { SignServiceService } from '../signservice.service';
@@ -15,10 +16,10 @@ export class SignupComponent implements OnInit {
   allUsers!: Observable<Sign[]>;
   signForm!: FormGroup;
   dataSaved = false;
-
+  userIdUpdate: any;
   signIdUpdate = null;
   massage = 'ABC';
-  constructor(private signservice: SignServiceService) {}
+  constructor(private signservice: SignServiceService, router: Router) {}
   onSubmit() {
     console.log(this.signForm);
     this.dataSaved = false;
@@ -42,7 +43,7 @@ export class SignupComponent implements OnInit {
       });
     } else {
       sign.id = this.signIdUpdate;
-      this.signservice.updateEmployee(sign).subscribe(() => {
+      this.signservice.updateEmployee(this.signIdUpdate).subscribe(() => {
         this.dataSaved = true;
         this.massage = 'Record Updated Successfully';
         this.loadAllUsers();
@@ -77,6 +78,37 @@ export class SignupComponent implements OnInit {
   }
   loadAllUsers() {
     this.allUsers = this.signservice.getAllUsers();
+  }
+  //create a function loadUserToEdit to update the details of existing user
+  loadUserToEdit(signId: number) {
+    this.signservice.getEmployeeById(signId).subscribe((sign) => {
+      //this.message = null;
+      //this.dataSaved = false;
+      this.userIdUpdate = sign.id;
+      this.signForm.controls['FirstName'].setValue(sign.FirstName);
+      this.signForm.controls['LastName'].setValue(sign.LastName);
+      this.signForm.controls['Email'].setValue(sign.Email);
+      this.signForm.controls['Password'].setValue(sign.Password);
+      this.signForm.controls['ConfirmPassword'].setValue(sign.ConfirmPassword);
+      this.signForm.controls['Pno'].setValue(sign.Pno);
+    });
+  }
+  //create a function deleteUser to delete an existing user
+  deleteUser(userId: number) {
+    if (confirm('Are you sure you want to delete this ?')) {
+      this.signservice.deleteEmployeeById(userId).subscribe(() => {
+        //this.dataSaved = true;
+        // this.message = 'Record Deleted Succefully';
+        this.loadAllUsers();
+        this.signIdUpdate = null;
+        this.signForm.reset();
+      });
+    }
+  }
+  resetForm() {
+    this.signForm.reset();
+    // this.message = null;
+    //this.dataSaved = false;
   }
 
   // -----------------using restapi

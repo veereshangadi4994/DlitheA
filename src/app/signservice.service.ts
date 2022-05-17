@@ -11,8 +11,10 @@ export class SignServiceService {
   getAllUsers(): Observable<Sign[]> {
     return this.http.get<Sign[]>(this.url);
   }
-  getEmployeeById(employeeId: string): Observable<Sign> {
-    return this.http.get<Sign>(this.url + '/' + employeeId);
+  getEmployeeById(employeeId: number): Observable<Sign> {
+    return this.http.get<Sign>(
+      this.url + '/GetEmployeeDetailsById?=' + employeeId
+    );
   }
   // Will invoke UserRegistrationsController->PostUserRegistration
   createUser(sign: Sign): Observable<Sign> {
@@ -21,17 +23,17 @@ export class SignServiceService {
     };
     return this.http.post<Sign>(this.url, sign, httpOptions);
   }
-  updateEmployee(employee: Sign): Observable<Sign> {
+  updateEmployee(sign: Sign): Observable<Sign> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
     return this.http.put<Sign>(
-      this.url + '/UpdateEmployeeDetails/',
-      employee,
+      this.url + '/UpdateEmployeeById?=' + sign.id,
+      sign,
       httpOptions
     );
   }
-  deleteEmployeeById(employeeid: string): Observable<number> {
+  deleteEmployeeById(employeeid: number): Observable<number> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
